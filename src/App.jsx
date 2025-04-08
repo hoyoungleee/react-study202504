@@ -1,4 +1,4 @@
-
+import React from 'react';
 import './App.css'
 
 function App() {
@@ -13,7 +13,18 @@ function App() {
     4. 의미없는 부모는 <React.Fragment>로 감싸면 됨
     5. 변수값이나 함수를 출력할 때는 {}로 감싸면 됨.
   */
-  return <h1>안녕 REACT!!</h1>;
+  // const $h1 = React.createElement('h1', null, '안녕 REACT!!'); -> fm
+
+  const subject = "Vanilla Javascript!!";
+
+  return ( 
+    <>
+      <h1 className='title'>안녕 {subject}</h1>
+      <h2>React 학습 시작!</h2>
+      <label htmlFor='username'>이름</label>
+      <input type="text" id="username" />
+    </>
+  );
 }
 
 export default App
