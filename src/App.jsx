@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css'
+import Greet from './components/Func';
+import Bye from './components/Bye';
+
 
 function App() {
    /*
@@ -15,14 +18,12 @@ function App() {
   */
   // const $h1 = React.createElement('h1', null, '안녕 REACT!!'); -> fm
 
-  const subject = "Vanilla Javascript!!";
+  // const subject = "Vanilla Javascript!!";
 
   return ( 
     <>
-      <h1 className='title'>안녕 {subject}</h1>
-      <h2>React 학습 시작!</h2>
-      <label htmlFor='username'>이름</label>
-      <input type="text" id="username" />
+      <Greet/>
+      <Bye />
     </>
   );
 }
