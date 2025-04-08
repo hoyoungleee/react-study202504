@@ -1,11 +1,9 @@
 import React from 'react';
-import './App.css'
-import Greet from './components/Func';
-import Bye from './components/Bye';
-
+import './App.css';
+import ExpenseItem from './components/expenses/ExpenseItem';
 
 function App() {
-   /*
+  /*
     jsx : 리액트에서 사용하는 특수한 js문법, 태그를 그대로 쓰면 알아서 변환
           html처럼 보이지만, 실제 html은 아닙니다.
 
@@ -16,16 +14,26 @@ function App() {
     4. 의미없는 부모는 <React.Fragment>로 감싸면 됨
     5. 변수값이나 함수를 출력할 때는 {}로 감싸면 됨.
   */
-  // const $h1 = React.createElement('h1', null, '안녕 REACT!!'); -> fm
 
-  // const subject = "Vanilla Javascript!!";
+  const expenses = [
+    { id: 1, title: '냠냠치킨', price: 19000, date: new Date(2023, 6, 19) },
+    { id: 2, title: '양파', price: 5000, date: new Date(2023, 6, 20) },
+    { id: 3, title: '포도', price: 20000, date: new Date(2023, 6, 21) },
+    { id: 4, title: '오렌지', price: 15000, date: new Date(2023, 6, 22) },
+  ];
 
-  return ( 
+  return (
     <>
-      <Greet/>
-      <Bye />
+      {expenses.map((item) => (
+        <ExpenseItem
+          key={item.id} // 반복문을 통해 같은 컴포넌트를 표현할 때, 각각을 구분할 수 있게 해주는 props
+          title={item.title}
+          price={item.price}
+          date={item.date}
+        />
+      ))}
     </>
   );
 }
 
-export default App
+export default App;
