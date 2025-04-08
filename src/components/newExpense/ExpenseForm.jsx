@@ -36,8 +36,11 @@ const ExpenseForm = ({ onSave }) => {
     // 상태가 변화했다는 트리거는 useState로부터 받은 setter 뿐입니다.
 
     // 입력받은 모든 정보를 App.js로 보내자. (userInput)
-    // 어떻게 -> App.js가 내려준 함수를 호출하면서, 매개값으로 던지면 됩니다.
-    onSave(userInput);
+    // 어떻게? -> App.jsx가 내려준 함수를 호출하면서, 매개값으로 던지면 됩니다.
+    onSave({
+      ...userInput,
+      date: new Date(userInput.date),
+    });
 
     // 다음 입력을 위한 입력창 리셋
     setUserInput({
