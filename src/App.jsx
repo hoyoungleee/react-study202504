@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import Hello from './components/Example';
-import Greet from './components/Greet';
-import Bye from './components/Bye';
 import ExpenseItem from './components/expenses/ExpenseItem';
-import NoName from './NoName';
 import NewExpense from './components/newExpense/NewExpense';
 import ExpenseFilter from './components/expenses/ExpenseFilter';
 import Card from './UI/Card';
@@ -26,7 +22,9 @@ function App() {
   );
 
   // 자식 컴포넌트인 ExpenseFilter에게 내려줄 함수
-  const filterChangeHandler = (selectedYear) => {};
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear); // 사용자가 선택한 연도로 상태를 변경
+  };
 
   // 자식 컴포넌트의 데이터를 부모 컴포넌트에서 받아내는 방법. (props drilling)
   const addExpenseHandler = (newEx) => {
@@ -39,19 +37,33 @@ function App() {
     setExpenseList([...expenseList, modifyEx]);
   };
 
+  // 고차함수 필터를 따로 분리 -> 필터링 결과가 비었을 경우 없다고 얘기하기 위해서
+  const filteredItem = expenseList.filter(
+    (item) => item.date.getFullYear().toString() === filteredYear,
+  );
+
+  //조건부 랜더링을 위한 변수 -> 기본값으로 없다고 깔아놓음
+  let expenseContent = <p>아직 등록된 지출이 없습니다.</p>;
+
+  //혹시 필터링 된 결과가 하나라도 존재한다면?
+  // 필터링된 결과를 ExpenseItem으로 맵핑하자.
+  if (filteredItem.length > 0) {
+    expenseContent = filteredItem.map((item) => (
+      <ExpenseItem
+        key={item.id} // 반복문을 통해 같은 컴포넌트를 표현할 때, 각각을 구분할 수 있게 해 주는 props
+        title={item.title}
+        price={item.price}
+        date={item.date}
+      />
+    ));
+  }
+
   return (
     <>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Card className='expenses'>
         <ExpenseFilter onChangeFilter={filterChangeHandler} />
-        {expenseList.map((item) => (
-          <ExpenseItem
-            key={item.id} // 반복문을 통해 같은 컴포넌트를 표현할 때, 각각을 구분할 수 있게 해 주는 props
-            title={item.title}
-            price={item.price}
-            date={item.date}
-          />
-        ))}
+        {expenseContent}
       </Card>
     </>
   );
