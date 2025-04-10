@@ -17,6 +17,8 @@ import React, { useRef, useState } from 'react';
 const AddUsers = ({ addUser }) => {
   // useRef 훅 : 특정 요소를 참조할 수 있게 해주는 기능(기억)
   // useRef로 지목한 요소는 재 랜더링 대상에 포함되지 않습니다.
+  // 단순요소의 특정 속성을 얻고자 할 때, 불필요한 랜더링을 방지하고 싶을 때 사용
+  // 입력값이 변경될 떄마다 특정 UI를 수정해야할 때 (상태에 따라 재랜더링이 발생)은 적합하지 않음.
   const nameInput = useRef();
   const ageInput = useRef();
 
