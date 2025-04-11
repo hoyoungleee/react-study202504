@@ -6,7 +6,7 @@ const CourseList = ({ items, onDelete }) => {
   return (
     <ul className='goal-list'>
       {items.map((item) => (
-        <CourseItem key={item.id} item={item} onDel={onDelete} />
+        <CourseItem key={item.id} item={item} onDelete={onDelete} />
       ))}
     </ul>
   );
